@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size() ; 
+        int mx = *max_element(height.begin() , height.end()) ; 
+        int index = find(height.begin(),height.end(),mx) - height.begin() ; 
+        int curr_mx = height[0] , res = 0 , res2 = 0 ; 
+        for (int i = 1 ; i <= index ; ++i) {
+            if (height[i] >= curr_mx) {
+                curr_mx = height[i] ; 
+            }
+            else {
+                res += curr_mx - height[i] ; 
+            }
+        } 
+        curr_mx = height[n-1];
+        for (int i = n-1 ; i >= index ; --i) {
+            if (height[i] >= curr_mx) {
+                curr_mx = height [i] ; 
+            }
+            else {
+                res2 += curr_mx - height[i] ;
+            }
+        }
+        return res + res2 ;
+
+    }
+};
